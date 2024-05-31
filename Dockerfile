@@ -1,16 +1,12 @@
-FROM node:21-alpine AS build
+FROM node:21-alpine
 
 WORKDIR /app
 
 COPY . .
 
 RUN yarn install && \
-    yarn build && \
-    yarn install --prod
+    yarn build
 
-FROM node:21-alpine
-
-WORKDIR /app
-COPY --from=build /app .
+EXPOSE 8080
 
 CMD ["yarn", "start"]
