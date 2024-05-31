@@ -1,16 +1,13 @@
 FROM node:21-alpine
 
-# Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Install app dependencies
 COPY package*.json ./
 
 RUN npm install
 
-# Bundle app source
 COPY . .
 
 EXPOSE 3333
 
-CMD [ "npm", "start" ]
+CMD ["npm", "run", "dev"]
