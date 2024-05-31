@@ -1,0 +1,47 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ucreate_app
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:
+    depends_on:
+      - db
+    networks:
+      - 
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-fpm
+    volumes:
+      - ./:/var/www/symfony:rw # Montage du projet Symfony en lecture/écriture
+    ports:
+      - "9155:9155" # Port de l'hôte : Port du conteneur
+    networks:
+      - ucreate_network
+
+  db:
+    image: postgres:13
+    container_name: db
+    environment:
+      POSTGRES_USER:  
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: kali
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: kali
+    ports:
+      - "8081:80"
+
+volumes:
+  db_data:

@@ -4,10 +4,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install && \
-    npm run build && \
-    rm -rf node_modules && \
-    npm install --prod
+RUN yarn install && \
+    yarn build && \
+    yarn install --prod
 
 FROM node:21-alpine
 
