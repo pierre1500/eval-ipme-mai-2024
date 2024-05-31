@@ -10,9 +10,5 @@ COPY --chown=node:node ./package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
 
-RUN node ace build --production
-
-COPY --chown=node:node ./package*.json ./
-RUN npm ci
 EXPOSE $PORT
 CMD [ "dumb-init", "node", "server.js" ]
