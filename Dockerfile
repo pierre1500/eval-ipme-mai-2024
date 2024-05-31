@@ -1,5 +1,7 @@
 FROM node:21-alpine
 
+RUN node ace migration:run
+
 RUN apk --no-cache add dumb-init
 RUN mkdir -p /home/node/app && chown node:node /home/node/app
 WORKDIR /home/node/app
