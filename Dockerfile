@@ -1,15 +1,18 @@
 FROM node:21-alpine
 
-WORKDIR /app
+# Project AdonisJS
 
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
 COPY package*.json ./
-
-RUN npm install -g npm@10.8.1
 
 RUN npm install
 
+# Bundle app source
 COPY . .
 
 EXPOSE 3333
 
-CMD ["npm", "run", "dev"]
+CMD [ "npm", "start" ]
